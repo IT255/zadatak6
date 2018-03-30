@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Zadatak 6</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<h1 class="title"> Random User Generator</h1>
+<div class="user-profile">
+	<img id="avatar" src="https://pbs.twimg.com/profile_images/743138182607175680/ZJzktgBk_400x400.jpg" />
+    <div id="fullname">Jon Snow</div>
+  <div id="username">
+  	kingofnorth
+  </div>
+    <div class="description">
+      <div>Email: <span id="email">jon@hotmail.com</span></div>
+      <div>City: <span id="city">Winterfell</span></div>
+  </div>
+  <div class="footer">
+    <button id="btn">Next User!</button>
+ </div>
+</div>
+
+<script>
+var fullnameDisp = document.querySelector("#fullname");
+var avatar = document.querySelector("#avatar");
+var username = document.querySelector("#username");
+var city = document.querySelector("#city");
+var email = document.querySelector("#email");
+
+
+$('#btn').click(function(){
+$.ajax({
+url: 'https://randomuser.me/api/',
+type: "GET",
+success: function(obj){
+
+    var parseData = obj;
+    //alert(data.name.first);
+    var data = parseData.results[0];
+    var fullname = data.name.first + " " + data.name.last;
+    fullnameDisp.innerText = fullname;
+    avatar.src = data.picture.medium;
+    username.innerText = data.login.username;
+    city.innerText = data.location.city;
+    email.innerText = data.email;
+
+}
+});
+});
+</script>
+</body>
+</html>
